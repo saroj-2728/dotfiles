@@ -16,7 +16,6 @@ window#waybar {
     border-radius: 12px;
     border: 2px solid rgba(137, 180, 250, 0.3);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    /* backdrop-filter: blur(10px); */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -99,46 +98,28 @@ window#waybar.hidden {
 #bluetooth,
 #pulseaudio,
 #backlight,
-#battery,
-#temperature,
-#memory,
-#cpu {
-    margin: 5px 2px;
+#battery {
+    margin: 5px 3px;
     padding: 5px 10px;
     border-radius: 8px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* CPU */
+/* Custom config for Temperature, Memory and CPU */
+#temperature,
+#memory,
 #cpu {
-    background: linear-gradient(135deg, rgba(137, 180, 250, 0.15), rgba(116, 199, 236, 0.15));
-    color: #89b4fa;
-    border: 1px solid rgba(137, 180, 250, 0.3);
-    margin-right: 10px;
+    margin: 5px 0;
+    padding: 5px 10px;
 }
 
-#cpu:hover {
-    background: linear-gradient(135deg, rgba(137, 180, 250, 0.25), rgba(116, 199, 236, 0.25));
-    /* transform: translateY(-1px); */
-}
-
-/* Memory */
-#memory {
-    background: linear-gradient(135deg, rgba(203, 166, 247, 0.15), rgba(245, 194, 231, 0.15));
-    color: #cba6f7;
-    border: 1px solid rgba(203, 166, 247, 0.3);
-}
-
-#memory:hover {
-    background: linear-gradient(135deg, rgba(203, 166, 247, 0.25), rgba(245, 194, 231, 0.25));
-    /* transform: translateY(-1px); */
-}
 
 /* Temperature */
 #temperature {
     background: linear-gradient(135deg, rgba(250, 179, 135, 0.15), rgba(249, 226, 175, 0.15));
     color: #fab387;
-    border: 1px solid rgba(250, 179, 135, 0.3);
+    border-radius: 8px 0 0 8px;
+    margin-left: 3px;
 }
 
 #temperature.critical {
@@ -146,6 +127,24 @@ window#waybar.hidden {
     color: #f38ba8;
     opacity: 0.8;
 }
+
+
+/* Memory */
+#memory {
+    background: linear-gradient(135deg, rgba(203, 166, 247, 0.15), rgba(245, 194, 231, 0.15));
+    color: #cba6f7;
+    /* border: 1px solid rgba(203, 166, 247, 0.3); */
+}
+
+
+/* CPU */
+#cpu {
+    background: linear-gradient(135deg, rgba(137, 180, 250, 0.15), rgba(116, 199, 236, 0.15));
+    color: #89b4fa;
+    margin-right: 10px;
+    border-radius: 0 8px 8px 0;
+}
+
 
 /* Battery */
 #battery {
@@ -170,6 +169,7 @@ window#waybar.hidden {
     animation: critical-pulse 1s infinite;
 }
 
+
 /* Audio */
 #pulseaudio {
     background: linear-gradient(135deg, rgba(148, 226, 213, 0.15), rgba(137, 220, 235, 0.15));
@@ -181,6 +181,7 @@ window#waybar.hidden {
     background: linear-gradient(135deg, rgba(108, 112, 134, 0.2), rgba(127, 132, 156, 0.2));
     color: #6c7086;
 }
+
 
 /* Network */
 /* Network module - Connected WiFi */
@@ -197,17 +198,11 @@ window#waybar.hidden {
     border: 1px solid rgba(166, 227, 161, 0.3);
 }
 
-/* Network module - Disconnected */
+/* Network module - Disconnected, Disabled */
+#network.disabled,
 #network.disconnected {
     background: linear-gradient(135deg, rgba(243, 139, 168, 0.15), rgba(235, 160, 172, 0.15));
     color: #f38ba8;
-}
-
-/* Network module - WiFi Disabled */
-#network.disabled {
-    background: linear-gradient(135deg, rgba(186, 194, 222, 0.15), rgba(147, 153, 178, 0.15));
-    color: #bac2de;
-    border: 1px solid rgba(186, 194, 222, 0.3);
 }
 
 /* Network module - Linked but no IP */
@@ -217,12 +212,14 @@ window#waybar.hidden {
     border: 1px solid rgba(249, 226, 175, 0.3);
 }
 
+
 /* Backlight */
 #backlight {
     background: linear-gradient(135deg, rgba(249, 226, 175, 0.15), rgba(250, 179, 135, 0.15));
     color: #f9e2af;
     border: 1px solid rgba(249, 226, 175, 0.3);
 }
+
 
 /* Bluetooth */
 #bluetooth {
@@ -237,6 +234,7 @@ window#waybar.hidden {
     color: #6c7086;
 }
 
+
 /* Idle Inhibitor */
 #idle_inhibitor {
     background: linear-gradient(135deg, rgba(249, 226, 175, 0.15), rgba(250, 179, 135, 0.15));
@@ -248,6 +246,7 @@ window#waybar.hidden {
     background: linear-gradient(135deg, rgba(166, 227, 161, 0.2), rgba(148, 226, 213, 0.2));
     color: #a6e3a1;
 }
+
 
 /* System Tray */
 #tray {
@@ -265,6 +264,7 @@ window#waybar.hidden {
     background-color: rgba(243, 139, 168, 0.2);
 }
 
+
 /* Hover effects for all modules */
 #cpu:hover,
 #memory:hover,
@@ -276,12 +276,11 @@ window#waybar.hidden {
 #bluetooth:hover,
 #idle_inhibitor:hover,
 #tray:hover {
-    /* transform: translateY(-2px); */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, rgba(137, 180, 250, 0.25), rgba(116, 199, 236, 0.25));
 }
 
-/* Tooltips */
 
+/* Tooltips */
 tooltip {
     font-family: "Fira Sans", sans-serif;
     padding: 8px;
