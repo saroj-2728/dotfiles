@@ -1,14 +1,15 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 46,
+    "height": 38,
     "spacing": 0,
-    "margin-top": 5,
-    "margin-left": 5,
-    "margin-right": 5,
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
     "modules-left": [
         "hyprland/workspaces",
-        "hyprland/window"
+        "hyprland/window",
+        "custom/music"
     ],
     "modules-center": [
         "clock"
@@ -30,16 +31,16 @@
         "all-outputs": true,
         "format": "{icon}",
         "format-icons": {
-            "1": "󰈹",
-            "2": "󰖟",
-            "3": "󰘐",
-            "4": "󰎄",
-            "5": "󰋩",
-            "6": "󰄖",
-            "7": "󰑴",
-            "8": "󰎆",
-            "9": "󰊖",
-            "10": "󰿩",
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "10": "10",
             "urgent": "",
             "focused": "",
             "default": ""
@@ -47,14 +48,12 @@
         "persistent-workspaces": {
             "1": [],
             "2": [],
-            "3": [],
-            "4": [],
-            "5": []
+            "3": []
         }
     },
     "hyprland/window": {
         "format": "{}",
-        "max-length": 50,
+        "max-length": 25,
         "separate-outputs": true
     },
     "clock": {
@@ -111,8 +110,8 @@
             "critical": 15
         },
         "format": "{icon} {capacity}%",
-        "format-charging": "󰂄 {capacity}%",
-        "format-plugged": "󰂄 {capacity}%",
+        "format-charging": "⚡{capacity}%",
+        "format-plugged": "⚡{capacity}%",
         "format-alt": "{icon} {time}",
         "format-icons": [
             "󰂎",
@@ -132,15 +131,15 @@
     "network": {
         "format-wifi": "󰤨 {signalStrength}%",
         "format-ethernet": "󰈀 Connected",
-        "format-disconnected": "󰤭 Disconnected",
-        "format-disabled": "󰤭 Disconnected",
+        "format-disconnected": "󰤭",
+        "format-disabled": "󰤭",
         "format-linked": "󰤭 {ifname} (No IP)",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "tooltip-format-wifi": "SSID: {essid}\nSignal: {signalStrength}%\nFrequency: {frequency}MHz\nIP: {ipaddr}",
         "tooltip-format-ethernet": "Interface: {ifname}\nIP: {ipaddr}/{cidr}",
-        "tooltip-format-disconnected": "Network disconnected - WiFi is on but not connected",
-        "tooltip-format-disabled": "WiFi radio is disabled",
-        "on-click-right": "nm-connection-editor",
+        "tooltip-format-disconnected": "WiFi disabled/disconnected",
+        "tooltip-format-disabled": "WiFi disabled/disconnected",
+        "on-click-right": "~/.config/waybar/scripts/wifi-menu.sh",
         "on-click-middle": "sh -c 'nmcli radio wifi | grep -q \"enabled\" && nmcli radio wifi off || nmcli radio wifi on'"
     },
     "bluetooth": {
@@ -196,8 +195,17 @@
         "tooltip": true
     },
     "tray": {
-        "icon-size": 18,
+        "icon-size": 15,
         "spacing": 8,
         "show-passive-items": true
+    },
+    "custom/music": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/music-status.sh",
+        "interval": 2,
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous",
+        "max-length": 26
     }
 }

@@ -20,7 +20,7 @@ configuration {
     selected-bg: rgba(94, 129, 172, 0.6);
 
     background-color: transparent;
-    border-color: #5e81ac;
+    border-color: rgba(51, 204, 255, 0.93);
     
     border: 0;
     margin: 0;
@@ -29,7 +29,8 @@ configuration {
 }
 
 window {
-    width: 30%;
+    width: 450;
+    height: 500;
     background-color: @bg;
     border: 2;
     border-color: @border-color;

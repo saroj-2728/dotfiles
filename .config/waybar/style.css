@@ -1,8 +1,8 @@
 /* Global Styles */
 * {
     font-family: "JetBrains Mono Nerd Font", "Noto Sans", "Font Awesome 6", monospace;
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: 500;
     border: none;
     border-radius: 0;
     margin: 0;
@@ -11,10 +11,9 @@
 
 /* Main Bar */
 window#waybar {
-    background: rgba(30, 30, 46, 0.95);
+    background: transparent;
     color: #cdd6f4;
     border-radius: 12px;
-    border: 2px solid rgba(137, 180, 250, 0.3);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -25,27 +24,26 @@ window#waybar.hidden {
 
 /* Workspace Styles */
 #workspaces {
-    background: linear-gradient(135deg, rgba(137, 180, 250, 0.1), rgba(203, 166, 247, 0.1));
-    margin: 5px 5px 5px 10px;
+    background-color: rgba(30, 30, 46, 0.5);
+    margin: 3px;
     padding: 0 5px;
-    border-radius: 10px;
+    border-radius: 8px;
     border: 1px solid rgba(137, 180, 250, 0.2);
 }
 
+/* 󰜎"format": "󰂃 {temperatureC}°C" */
 #workspaces button {
-    padding: 5px 10px;
+    padding: 0 8px;
     margin: 3px 2px;
     border-radius: 8px;
     color: #6c7086;
     background: transparent;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 16px;
 }
 
 #workspaces button:hover {
     background: rgba(137, 180, 250, 0.2);
     color: #89b4fa;
-    /* transform: scale(1.05); */
 }
 
 #workspaces button.active {
@@ -63,94 +61,194 @@ window#waybar.hidden {
 
 /* Window Title */
 #window {
-    background: linear-gradient(135deg, rgba(166, 227, 161, 0.1), rgba(148, 226, 213, 0.1));
-    margin: 5px;
-    padding: 5px 15px;
+    background-color: rgba(30, 30, 46, 0.5);
+    margin: 3px;
+    padding: 0 15px;
     border-radius: 10px;
-    border: 1px solid rgba(166, 227, 161, 0.2);
-    color: #a6e3a1;
+    border: 1px solid rgba(137, 180, 250, 0.2);
+    color: rgba(255, 255, 255, 0.7);
     font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+#window:hover {
+    background: rgba(137, 180, 250, 0.2);
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Clock */
 #clock {
-    background: linear-gradient(135deg, rgba(250, 179, 135, 0.2), rgba(249, 226, 175, 0.15));
-    color: #fab387;
-    margin: 5px;
-    padding: 5px 15px;
+    /* background: linear-gradient(135deg, rgba(250, 179, 135, 0.2), rgba(249, 226, 175, 0.15)); */
+    color: #ffffff;
+    margin: 3px;
+    padding: 0 15px;
     border-radius: 8px;
-    border: 1px solid rgba(250, 179, 135, 0.4);
+    border: 1px solid rgba(51, 204, 255, 0.933);
     font-weight: bold;
-    font-size: 14px;
     transition: all 0.3s ease;
 }
 
 #clock:hover {
-    background: linear-gradient(135deg, rgba(250, 179, 135, 0.3), rgba(249, 226, 175, 0.25));
-    border-color: rgba(250, 179, 135, 0.6);
+    background: rgba(137, 180, 250, 0.2);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Right side modules container */
+
+
+#custom-music {
+  font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+  color: #ffffff;
+  padding: 0 10px;
+}
+
+
+
+/* Tray and Idle inhibitor */
 #tray,
-#idle_inhibitor,
-#network,
-#bluetooth,
-#pulseaudio,
-#backlight,
-#battery {
-    margin: 5px 3px;
-    padding: 5px 10px;
+#idle_inhibitor {
+    margin: 3px;
+    padding: 0 10px;
     border-radius: 8px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Custom config for Temperature, Memory and CPU */
-#temperature,
-#memory,
-#cpu {
-    margin: 5px 0;
-    padding: 5px 10px;
+/* System Tray */
+#tray {
+    background-color: rgba(30, 30, 46, 0.5);
+    margin-right: 10px;
+    border: 1px solid rgba(205, 214, 244, 0.2);
+}
+
+#tray>.passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: rgba(243, 139, 168, 0.2);
+}
+
+/* Idle Inhibitor */
+#idle_inhibitor {
+    background-color: rgba(30, 30, 46, 0.5);
+    color: #f9e2af;
+    border: 1px solid rgba(137, 180, 250, 0.2);
+}
+
+#idle_inhibitor.activated {
+    background: linear-gradient(135deg, rgba(166, 227, 161, 0.2), rgba(148, 226, 213, 0.2));
+    color: #a6e3a1;
 }
 
 
-/* Temperature */
-#temperature {
-    background: linear-gradient(135deg, rgba(250, 179, 135, 0.15), rgba(249, 226, 175, 0.15));
-    color: #fab387;
+
+/* Network and Bluetooth */
+#network,
+#bluetooth {
+    margin: 3px 0;
+    padding: 0 5px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Network */
+/* Network module - Connected WiFi */
+#network {
+    background: linear-gradient(135deg, rgba(100, 149, 237, 0.35), rgba(30, 144, 255, 0.35));
+    color: #74c7ec;
     border-radius: 8px 0 0 8px;
     margin-left: 3px;
+    border: 1px solid rgba(137, 180, 250, 0.2);
+    border-right: none;
 }
 
-#temperature.critical {
-    background: linear-gradient(135deg, rgba(243, 139, 168, 0.3), rgba(235, 160, 172, 0.3));
-    color: #f38ba8;
-    opacity: 0.8;
-}
-
-
-/* Memory */
-#memory {
-    background: linear-gradient(135deg, rgba(203, 166, 247, 0.15), rgba(245, 194, 231, 0.15));
-    color: #cba6f7;
-    /* border: 1px solid rgba(203, 166, 247, 0.3); */
-}
-
-
-/* CPU */
-#cpu {
-    background: linear-gradient(135deg, rgba(137, 180, 250, 0.15), rgba(116, 199, 236, 0.15));
-    color: #89b4fa;
-    margin-right: 10px;
-    border-radius: 0 8px 8px 0;
-}
-
-
-/* Battery */
-#battery {
+/* Network module - Ethernet */
+#network.ethernet {
     background: linear-gradient(135deg, rgba(166, 227, 161, 0.15), rgba(148, 226, 213, 0.15));
     color: #a6e3a1;
     border: 1px solid rgba(166, 227, 161, 0.3);
+}
+
+/* Network module - Disconnected, Disabled */
+#network.disabled,
+#network.disconnected {
+    background: linear-gradient(135deg, rgba(243, 139, 168, 0.15), rgba(235, 160, 172, 0.15));
+    color: #f38ba8;
+    padding: 3px 12px 3px 10px;
+}
+
+/* Network module - Linked but no IP */
+#network.linked {
+    background: linear-gradient(135deg, rgba(249, 226, 175, 0.15), rgba(245, 194, 231, 0.15));
+    color: #f9e2af;
+    border: 1px solid rgba(249, 226, 175, 0.3);
+}
+
+/* Bluetooth */
+#bluetooth {
+    background-color: rgba(30, 30, 46, 0.5);
+    color: #89b4fa;
+    margin-right: 3px;
+    padding: 0 10px;
+    border-radius: 0 8px 8px 0;
+    border: 1px solid rgba(137, 180, 250, 0.2);
+    border-left: none;
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+    background: rgba(30, 30, 46, 0.3);
+    color: #6c7086;
+}
+
+#bluetooth.on {
+    background: linear-gradient(135deg, rgba(100, 149, 237, 0.35), rgba(30, 144, 255, 0.35));
+    color: #74c7ec;
+}
+
+
+
+/* Brightness, Audio and Battery */
+#pulseaudio,
+#backlight,
+#battery {
+    margin: 3px 0;
+    padding: 0 5px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Backlight */
+#backlight {
+    background-color: rgba(30, 30, 46, 0.5);
+    color: #f9e2af;
+    border-radius: 8px 0 0 8px;
+    margin-left: 3px;
+    border: 1px solid rgba(137, 180, 250, 0.2);
+    border-right: none;
+}
+
+/* Audio */
+#pulseaudio {
+    background-color: rgba(30, 30, 46, 0.5);
+    color: #94e2d5;
+    border: 1px solid rgba(137, 180, 250, 0.2);
+    border-right: none;
+    border-left: none;
+}
+
+#pulseaudio.muted {
+    background: linear-gradient(135deg, rgba(207, 79, 115, 0.3), rgba(212, 69, 93, 0.3));
+    color: #f38ba8;
+}
+
+/* Battery */
+#battery {
+    background-color: rgba(30, 30, 46, 0.5);
+    color: #a6e3a1;
+    margin-right: 3px;
+    border-radius: 0 8px 8px 0;
+    border: 1px solid rgba(137, 180, 250, 0.2);
+    border-left: none;
 }
 
 #battery.charging {
@@ -170,99 +268,49 @@ window#waybar.hidden {
 }
 
 
-/* Audio */
-#pulseaudio {
-    background: linear-gradient(135deg, rgba(148, 226, 213, 0.15), rgba(137, 220, 235, 0.15));
-    color: #94e2d5;
-    border: 1px solid rgba(148, 226, 213, 0.3);
+
+/* Temperature, Memory and CPU */
+#temperature,
+#memory,
+#cpu {
+    margin: 3px 0;
+    padding: 0 5px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: rgba(255, 255, 255, 0.7);
 }
 
-#pulseaudio.muted {
-    background: linear-gradient(135deg, rgba(108, 112, 134, 0.2), rgba(127, 132, 156, 0.2));
-    color: #6c7086;
+/* Temperature */
+#temperature {
+    background-color: rgba(30, 30, 46, 0.5);
+    border-radius: 8px 0 0 8px;
+    margin-left: 3px;
+    border: 1px solid rgba(137, 180, 250, 0.2);
+    border-right: none;
 }
 
-
-/* Network */
-/* Network module - Connected WiFi */
-#network {
-    background: linear-gradient(135deg, rgba(116, 199, 236, 0.15), rgba(137, 180, 250, 0.15));
-    color: #74c7ec;
-    border: 1px solid rgba(116, 199, 236, 0.3);
-}
-
-/* Network module - Ethernet */
-#network.ethernet {
-    background: linear-gradient(135deg, rgba(166, 227, 161, 0.15), rgba(148, 226, 213, 0.15));
-    color: #a6e3a1;
-    border: 1px solid rgba(166, 227, 161, 0.3);
-}
-
-/* Network module - Disconnected, Disabled */
-#network.disabled,
-#network.disconnected {
-    background: linear-gradient(135deg, rgba(243, 139, 168, 0.15), rgba(235, 160, 172, 0.15));
+#temperature.critical {
+    background: linear-gradient(135deg, rgba(243, 139, 168, 0.3), rgba(235, 160, 172, 0.3));
     color: #f38ba8;
+    opacity: 0.8;
 }
 
-/* Network module - Linked but no IP */
-#network.linked {
-    background: linear-gradient(135deg, rgba(249, 226, 175, 0.15), rgba(245, 194, 231, 0.15));
-    color: #f9e2af;
-    border: 1px solid rgba(249, 226, 175, 0.3);
+/* Memory */
+#memory {
+    background-color: rgba(30, 30, 46, 0.5);
+    border: 1px solid rgba(137, 180, 250, 0.2);
+    border-right: none;
+    border-left: none;
 }
 
-
-/* Backlight */
-#backlight {
-    background: linear-gradient(135deg, rgba(249, 226, 175, 0.15), rgba(250, 179, 135, 0.15));
-    color: #f9e2af;
-    border: 1px solid rgba(249, 226, 175, 0.3);
+/* CPU */
+#cpu {
+    background-color: rgba(30, 30, 46, 0.5);
+    margin-right: 3px;
+    border-radius: 0 8px 8px 0;
+    border: 1px solid rgba(137, 180, 250, 0.2);
+    border-left: none;
 }
 
-
-/* Bluetooth */
-#bluetooth {
-    background: linear-gradient(135deg, rgba(137, 180, 250, 0.15), rgba(203, 166, 247, 0.15));
-    color: #89b4fa;
-    border: 1px solid rgba(137, 180, 250, 0.3);
-}
-
-#bluetooth.disabled,
-#bluetooth.off {
-    background: linear-gradient(135deg, rgba(108, 112, 134, 0.15), rgba(127, 132, 156, 0.15));
-    color: #6c7086;
-}
-
-
-/* Idle Inhibitor */
-#idle_inhibitor {
-    background: linear-gradient(135deg, rgba(249, 226, 175, 0.15), rgba(250, 179, 135, 0.15));
-    color: #f9e2af;
-    border: 1px solid rgba(249, 226, 175, 0.3);
-}
-
-#idle_inhibitor.activated {
-    background: linear-gradient(135deg, rgba(166, 227, 161, 0.2), rgba(148, 226, 213, 0.2));
-    color: #a6e3a1;
-}
-
-
-/* System Tray */
-#tray {
-    background: linear-gradient(135deg, rgba(205, 214, 244, 0.1), rgba(186, 194, 222, 0.1));
-    margin-right: 10px;
-    border: 1px solid rgba(205, 214, 244, 0.2);
-}
-
-#tray>.passive {
-    -gtk-icon-effect: dim;
-}
-
-#tray>.needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: rgba(243, 139, 168, 0.2);
-}
 
 
 /* Hover effects for all modules */
@@ -276,14 +324,16 @@ window#waybar.hidden {
 #bluetooth:hover,
 #idle_inhibitor:hover,
 #tray:hover {
-    background: linear-gradient(135deg, rgba(137, 180, 250, 0.25), rgba(116, 199, 236, 0.25));
+    background: rgba(137, 180, 250, 0.2);
+    color: white;
 }
 
 
 /* Tooltips */
 tooltip {
     font-family: "Fira Sans", sans-serif;
-    padding: 8px;
+    font-size: 16px;
+    padding: 0;
     border-radius: 8px;
     background-color: rgba(30, 30, 46, 0.95);
     border: 1px solid #585b70;
@@ -291,11 +341,12 @@ tooltip {
 }
 
 tooltip calendar {
-    padding: 5px;
+    padding: 0;
+    font-size: 16px;
     margin-top: 5px;
 }
 
 tooltip label {
     color: #cdd6f4;
-    padding: 5px;
+    padding: 0;
 }
