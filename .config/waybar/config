@@ -3,9 +3,9 @@
     "position": "top",
     "height": 38,
     "spacing": 0,
-    "margin-top": 0,
-    "margin-left": 0,
-    "margin-right": 0,
+    "margin-top": 2,
+    "margin-left": 4,
+    "margin-right": 4,
     "modules-left": [
         "hyprland/workspaces",
         "hyprland/window",
@@ -203,9 +203,9 @@
         "format": "{}",
         "exec": "~/.config/waybar/scripts/music-status.sh",
         "interval": 2,
-        "on-click": "playerctl play-pause",
+        "on-click-middle": "playerctl play-pause",
         "on-click-right": "playerctl next",
-        "on-click-middle": "playerctl previous",
+        "on-click": "playerctl previous",
         "max-length": 26
     }
 }

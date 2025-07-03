@@ -51,7 +51,6 @@ main() {
         "󰖪 Disconnect")
             if [ -n "$current_ssid" ]; then
                 nmcli connection down "$current_ssid" 2>/dev/null
-                notify-send "WiFi" "Disconnected from $current_ssid"
             fi
             ;;
         "Refresh Networks")
@@ -68,29 +67,17 @@ main() {
                 # Secured network
                 if nmcli connection show | grep -qw "$ssid"; then
                     # Profile exists, just connect
-                    if nmcli connection up "$ssid" 2>/dev/null; then
-                        notify-send "WiFi" "Connected to $ssid"
-                    else
-                        notify-send "WiFi" "Failed to connect to $ssid"
-                    fi
+		    nmcli connection up "$ssid" >/dev/null 2>&1
                 else
                     # No saved profile, ask for password
                     password=$(rofi -dmenu -password -p "Password for $ssid:")
                     if [ -n "$password" ]; then
-                        if nmcli device wifi connect "$ssid" password "$password" 2>/dev/null; then
-                            notify-send "WiFi" "Connected to $ssid"
-                        else
-                            notify-send "WiFi" "Failed to connect to $ssid"
-                        fi
+			nmcli device wifi connect "$ssid" password "$password" >/dev/null 2>&1
                     fi
                 fi
             else
                 # Open network
-                if nmcli device wifi connect "$ssid" 2>/dev/null; then
-                    notify-send "WiFi" "Connected to $ssid"
-                else
-                    notify-send "WiFi" "Failed to connect to $ssid"
-                fi
+		nmcli device wifi connect "$ssid" >/dev/null 2>&1
             fi
             ;;
     esac
