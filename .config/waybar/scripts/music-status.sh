@@ -4,28 +4,34 @@ escape() {
     echo "$1" | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g'
 }
 
-# Max characters allowed
-max_length=56
+max_length=40
 
 status=$(playerctl status 2>/dev/null)
 title=$(playerctl metadata title 2>/dev/null)
+artist=$(playerctl metadata artist 2>/dev/null)
 
 if [[ "$status" == "Playing" ]]; then
-    icon=""
+    icon="󰐊"
 elif [[ "$status" == "Paused" ]]; then
-    icon=""
+    icon="󰏤"
 else
-    echo ""
+    echo "󰎆 No music playing"
     exit
 fi
 
-# Truncate title
-if [[ ${#title} -gt $max_length ]]; then
-	title="${title:0:$max_length}..."
+# Create display text
+if [[ -n "$artist" && -n "$title" ]]; then
+    display_text="$artist - $title"
+else
+    display_text="$title"
 fi
 
-# Escape the text for GTK
-# artist=$(escape "$artist")
-title=$(escape "$title")
+# Truncate if too long
+if [[ ${#display_text} -gt $max_length ]]; then
+    display_text="${display_text:0:$max_length}..."
+fi
 
-echo "$icon $title"
+# Escape for GTK
+display_text=$(escape "$display_text")
+
+echo "$icon $display_text"
