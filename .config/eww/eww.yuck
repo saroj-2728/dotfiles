@@ -1,0 +1,212 @@
+;; Define our control center window
+(defwindow control-center
+  :monitor 1
+  :geometry (geometry
+    :x "0.5%"
+    :y "1%"
+  :anchor "top right")
+  :stacking "fg"
+  :windowtype "dock"
+  :wm-ignore true
+  (box :class "control-center-box"
+    :orientation "v"
+    :space-evenly false
+    :spacing 10
+    (control-sliders)
+    (box :class "network-row"
+      :orientation "h"
+      :space-evenly true
+      :spacing 10
+      (wifi-control)
+      (bluetooth-control))
+    (box :class "feature-row"
+      :orientation "h"
+      :space-evenly true
+      :spacing 10
+      (nightlight-control)
+      (focus-control))))
+
+;; Define the sliders section (brightness and volume)
+(defwidget control-sliders []
+  (box :class "sliders-box"
+    :orientation "v"
+    :space-evenly false
+    :spacing 15
+    
+    ;; Brightness control
+    (box :class "slider-item"
+      :orientation "h"
+      :space-evenly false
+      :spacing 10
+      (label :class "slider-icon" :text "󰃠")
+      (scale :value brightness
+        :onchange "scripts/set-brightness.sh {}"
+        :min 0
+        :max 100
+      :tooltip "Brightness: ${brightness}%"))
+    
+    ;; Volume control
+    (box :class "slider-item"
+      :orientation "h"
+      :space-evenly false
+      :spacing 10
+      (label :class "slider-icon" :text "${volume-icon}")
+      (scale :value volume
+        :onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%"
+        :min 0
+        :max 100
+      :tooltip "Volume: ${volume}%"))))
+
+;; Define WiFi control widget
+(defwidget wifi-control []
+  (box :class "network-box"
+    :orientation "v"
+    :space-evenly false
+    :spacing 5
+    (box :class "network-container"
+      :orientation "h"
+      :space-evenly false
+      (box :class "network-details"
+        :orientation "v"
+        :space-evenly false
+        :hexpand true
+        (box :class "icon-and-label"
+          :orientation "h"
+          :space-evenly false
+          :spacing 10
+          (label :class "network-icon ${wifi-status == 'connected' ? 'wifi-connected' : 'wifi-disconnected'}"
+          :text "${wifi-icon}")
+          (label :class "network-label"
+            :text "WiFi"
+          :halign "start"))
+        (label :class "network-status"
+          :text "${wifi-status == 'connected' ? wifi-ssid : 'Disconnected'}"
+        :halign "start"))
+      (button :class "network-arrow"
+        :onclick "notify-send 'WiFi Settings' 'Opening WiFi settings...'"
+        :valign "center"
+        (label :text "❯")))
+    (button :class "network-overlay-button"
+    :onclick "scripts/toggle-wifi.sh")))
+
+;; Define Bluetooth control widget
+(defwidget bluetooth-control []
+  (box :class "network-box"
+    :orientation "v"
+    :space-evenly false
+    :spacing 5
+    (box :class "network-container"
+      :orientation "h"
+      :space-evenly false
+      (box :class "network-details"
+        :orientation "v"
+        :space-evenly false
+        :hexpand true
+        (box :class "icon-and-label"
+          :orientation "h"
+          :space-evenly false
+          :spacing 10
+          (label :class "network-icon ${bt-status ? 'bt-on' : 'bt-off'}"
+          :text "${bt-icon}")
+          (label :class "network-label"
+            :text "Bluetooth"
+          :halign "start"))
+        (label :class "network-status"
+          :text "${bt-status ? 'On' : 'Off'}"
+        :halign "start"))
+      (button :class "network-arrow"
+        :onclick "notify-send 'Bluetooth Settings' 'Opening Bluetooth settings...'"
+        :valign "center"
+        (label :text "❯")))
+    (button :class "network-overlay-button"
+    :onclick "scripts/toggle-bluetooth.sh")))
+
+;; Define Night Light control widget
+(defwidget nightlight-control []
+  (box :class "network-box"
+    :orientation "v"
+    :space-evenly false
+    :spacing 5
+    (box :class "network-container"
+      :orientation "h"
+      :space-evenly false
+      (box :class "network-details"
+        :orientation "v"
+        :space-evenly false
+        :hexpand true
+        (box :class "icon-and-label"
+          :orientation "h"
+          :space-evenly false
+          :spacing 10
+          (label :class "network-icon ${nightlight-status ? 'nightlight-on' : 'nightlight-off'}"
+          :text "${nightlight-status ? '󰛨' : '󱩌'}")
+          (label :class "network-label"
+            :text "Night Light"
+          :halign "start"))
+        (label :class "network-status"
+          :text "${nightlight-status ? 'On' : 'Off'}"
+        :halign "start")))
+    (button :class "network-overlay-button"
+    :onclick "scripts/toggle-nightlight.sh")))
+
+;; Define Focus Assist control widget
+(defwidget focus-control []
+  (box :class "network-box"
+    :orientation "v"
+    :space-evenly false
+    :spacing 5
+    (box :class "network-container"
+      :orientation "h"
+      :space-evenly false
+      (box :class "network-details"
+        :orientation "v"
+        :space-evenly false
+        :hexpand true
+        (box :class "icon-and-label"
+          :orientation "h"
+          :space-evenly false
+          :spacing 10
+          (label :class "network-icon ${focus-status ? 'focus-on' : 'focus-off'}"
+          :text "${focus-status ? '󰍶' : '󰍶'}")
+          (label :class "network-label"
+            :text "Focus Assist"
+          :halign "start"))
+        (label :class "network-status"
+          :text "${focus-status ? 'On' : 'Off'}"
+        :halign "start")))
+    (button :class "network-overlay-button"
+    :onclick "scripts/toggle-focus.sh")))
+
+;; Variables
+(defpoll brightness :interval "1s"
+"cat ~/.cache/eww/brightness || echo 50")
+
+(defpoll volume :interval "1s"
+  "pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '[0-9]+(?=%)' | head -1")
+
+(defpoll volume-icon :interval "1s"
+"scripts/get-volume-icon.sh")
+
+(defpoll wifi-status :interval "5s"
+"nmcli -t -f STATE g | head -n1")
+
+(defpoll wifi-ssid :interval "5s"
+"nmcli -t -f active,ssid dev wifi | grep '^yes:' | cut -d':' -f2")
+
+(defpoll wifi-icon :interval "5s"
+"scripts/get-wifi-icon.sh")
+
+;; Bluetooth variables
+(defpoll bt-status :interval "5s"
+"bluetoothctl show | grep 'Powered: yes' > /dev/null && echo true || echo false")
+
+(defpoll bt-icon :interval "5s"
+"scripts/get-bluetooth-icon.sh")
+
+;; Night Light variables
+(defpoll nightlight-status :interval "5s"
+"scripts/get-nightlight-status.sh")
+
+;; Focus mode variables
+(defpoll focus-status :interval "5s"
+"scripts/get-focus-status.sh")
