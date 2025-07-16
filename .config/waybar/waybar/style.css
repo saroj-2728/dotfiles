@@ -1,0 +1,238 @@
+/* Global Styles */
+* {
+    font-family: "JetBrains Mono Nerd Font", "Noto Sans", monospace;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Bar - Transparent background */
+window#waybar {
+    background: transparent;
+    color: #ffffff;
+}
+
+/* Left Section - Launcher + Window + Workspaces */
+#custom-launcher {
+    background: rgba(18, 22, 26, 0.7);
+    color: #ffffff;
+    font-size: 14px;
+    padding: 0 14px;
+    margin: 0 20px 0 2px;
+    transition: background 0.2s ease;
+    border: 1px solid rgba(26, 230, 204, 1);
+    border-radius: 6px;
+}
+
+#custom-launcher:hover {
+    background: rgba(50, 50, 50, 0.9);
+}
+
+/* Window module for app icons */
+#window {
+    background: rgba(18, 22, 26, 0.7);
+    font-size: 16px;
+    margin: 0;
+    padding: 0 14px;
+    transition: background 0.2s ease;
+    color: #ffffff;
+    border: 1px solid rgba(26, 230, 204, 1);
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+}
+
+#window:hover {
+    background: rgba(50, 50, 50, 0.9);
+}
+
+/* Color specific apps when active */
+#window.code-oss,
+#window.Code {
+    color: #007ACC;
+}
+
+#window.firefox,
+#window.Firefox {
+    color: #FF7139;
+}
+
+#window.kitty,
+#window.Kitty {
+    color: #50fa7b;
+}
+
+#window.brave-browser,
+#window.Brave-browser {
+    color: #FB542B;
+}
+
+#workspaces {
+    background: rgba(18, 22, 26, 0.7);
+    margin: 0;
+    padding: 0;
+    padding-right: 4px;
+    border: 1px solid rgba(26, 230, 204, 1);
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    margin: 4px;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.7);
+    background: transparent;
+    transition: all 0.2s ease;
+    min-width: 20px;
+    min-height: 20px;
+    font-size: 11px;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
+#workspaces button.active {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    background: rgba(255, 120, 120, 0.4);
+    color: #ff7878;
+}
+
+
+/* Center Section - Music (MPRIS) */
+#mpris {
+    background: rgba(18, 22, 26, 0.7);
+    border-radius: 6px;
+    margin: 0;
+    padding: 0 12px;
+    border: 1px solid rgba(26, 230, 204, 1);
+    color: #ffffff;
+    font-weight: 400;
+    transition: background 0.2s ease;
+}
+
+#mpris:hover {
+    background: rgba(50, 50, 50, 0.9);
+}
+
+#mpris.paused {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+
+/* Right-Section - Combined Block */
+#clock {
+    background: rgba(18, 22, 26, 0.7);
+    border-radius: 6px 0 0 6px;
+    margin: 0;
+    padding: 0 4px 0 10px;
+    border: 1px solid rgba(26, 230, 204, 1);
+    border-right: none;
+    color: #ffffff;
+    transition: background 0.2s ease;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+#battery,
+#network,
+#pulseaudio,
+#backlight,
+#tray {
+    background: rgba(18, 22, 26, 0.7);
+    border-radius: 0;
+    margin: 0;
+    padding: 0 4px;
+    border: 1px solid rgba(26, 230, 204, 1);
+    border-right: none;
+    border-left: none;
+    color: #ffffff;
+    transition: background 0.2s ease;
+}
+
+#custom-user {
+    background: rgba(18, 22, 26, 0.7);
+    border-radius: 0 6px 6px 0;
+    margin: 0;
+    padding: 0 10px 0 4px;
+    border: 1px solid rgba(26, 230, 204, 1);
+    border-left: none;
+    color: #ffffff;
+    transition: background 0.2s ease;
+    font-weight: 500;
+}
+
+/* Individual module styling */
+#battery {
+    font-size: 13px;
+    color: #90EE90;
+}
+
+#battery.warning:not(.charging) {
+    color: #FFA500;
+}
+
+#battery.critical:not(.charging) {
+    color: #FF6B6B;
+}
+
+#battery.charging {
+    color: #90EE90;
+}
+
+#network {
+    font-size: 13px;
+    color: #87CEEB;
+}
+
+#network.disconnected {
+    color: #FF6B6B;
+}
+
+#pulseaudio {
+    font-size: 13px;
+    color: #DDA0DD;
+}
+
+#backlight {
+    color: #ffe066;
+}
+
+#pulseaudio.muted {
+    color: #FF6B6B;
+}
+
+#tray {
+    padding: 4px 6px;
+}
+
+/* Hover effects for the combined block */
+#clock:hover,
+#custom-user:hover,
+#battery:hover,
+#network:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#tray:hover {
+    background: rgba(50, 50, 50, 0.9);
+}
+
+/* Tooltips */
+tooltip {
+    font-family: "JetBrains Mono Nerd Font", "Noto Sans", sans-serif;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(26, 230, 204, 1);
+    color: #ffffff;
+}

@@ -1,21 +1,9 @@
-;; Define the closer widget for click-outside functionality
-(defwidget closer [window]
-  (eventbox :onclick "eww close ${window} && eww close ${window}-closer"))
-
-;; Define the closer window for control-center
-(defwindow control-center-closer
-  :monitor 1
-  :geometry (geometry :width "100%" :height "100%")
-  :stacking "fg"
-  :focusable false
-  (closer :window "control-center"))
-
 ;; Define our control center window
 (defwindow control-center
   :monitor 1
   :geometry (geometry
     :x "0.5%"
-    :y "0.8%"
+    :y "1%"
   :anchor "top right")
   :stacking "fg"
   :windowtype "dock"
@@ -36,7 +24,7 @@
       :space-evenly true
       :spacing 10
       (nightlight-control)
-      (dnd-control))))
+      (focus-control))))
 
 ;; Define the sliders section (brightness and volume)
 (defwidget control-sliders []
@@ -165,20 +153,20 @@
             :text "${nightlight-status ? 'On' : 'Off'}"
           :halign "start"))))))
 
-;; Define dnd Assist control widget with hover effect - maintaining original layout
-(defwidget dnd-control []
+;; Define Focus Assist control widget with hover effect - maintaining original layout
+(defwidget focus-control []
   (eventbox
-    :onhover "${EWW_CMD} update dnd_hover=true"
-    :onhoverlost "${EWW_CMD} update dnd_hover=false"
-    :onclick "scripts/toggle-dnd.sh"
-    (box :class "network-box ${dnd_hover ? 'hover' : ''}"
+    :onhover "${EWW_CMD} update focus_hover=true"
+    :onhoverlost "${EWW_CMD} update focus_hover=false"
+    :onclick "scripts/toggle-focus.sh"
+    (box :class "network-box ${focus_hover ? 'hover' : ''}"
       :orientation "v"
       :space-evenly false
       :spacing 5
       (box :class "network-container"
         :orientation "h"
         :space-evenly false
-        (box :class "network-details ${dnd_hover ? 'text-hover' : ''}"
+        (box :class "network-details ${focus_hover ? 'text-hover' : ''}"
           :orientation "v"
           :space-evenly false
           :hexpand true
@@ -186,13 +174,13 @@
             :orientation "h"
             :space-evenly false
             :spacing 10
-            (label :class "network-icon ${dnd-status ? 'dnd-on' : 'dnd-off'}"
-            :text "${dnd-status ? '󰍶' : '󰍶'}")
+            (label :class "network-icon ${focus-status ? 'focus-on' : 'focus-off'}"
+            :text "${focus-status ? '󰍶' : '󰍶'}")
             (label :class "network-label"
-              :text "DND"
+              :text "Focus Assist"
             :halign "start"))
           (label :class "network-status"
-            :text "${dnd-status ? 'On' : 'Off'}"
+            :text "${focus-status ? 'On' : 'Off'}"
           :halign "start"))))))
 
 ;; Variables
@@ -225,12 +213,12 @@
 (defpoll nightlight-status :interval "1s"
 "scripts/get-nightlight-status.sh || echo false")
 
-;; dnd Assist variables
-(defpoll dnd-status :interval "1s"
-"scripts/get-dnd-status.sh || echo false")
+;; Focus Assist variables
+(defpoll focus-status :interval "1s"
+"scripts/get-focus-status.sh || echo false")
 
 ;; Hover state variables
 (defvar wifi_hover false)
 (defvar bt_hover false)
 (defvar nightlight_hover false)
-(defvar dnd_hover false)
+(defvar focus_hover false)

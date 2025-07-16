@@ -6,8 +6,8 @@
 .control-center-box {
   background-color: #141414;
   opacity: 0.95;
-  border-radius: 8px;
-  padding: 25px;
+  border-radius: 12px;
+  padding: 18px;
   color: #a9b1d6;
   font-family: "JetBrains Mono Nerd Font", monospace;
   border: 1px solid rgba(26, 230, 204, 1);
@@ -39,7 +39,7 @@ scale trough {
   background-color: #32344a;
   border-radius: 5px;
   min-height: 6px;
-  min-width: 292px;
+  min-width: 288px;
 }
 
 scale trough highlight {
@@ -168,33 +168,27 @@ scale trough highlight {
 
 // Hover effects for Night Light icons
 .hover .nightlight-on {
-  color: #ffb483;
-  /* Brighter orange on hover */
+  color: #ffb483;  /* Brighter orange on hover */
 }
 
 .hover .nightlight-off {
-  color: #97baff;
-  /* Brighter blue on hover */
+  color: #97baff;  /* Brighter blue on hover */
 }
 
-// dnd Assist styling
-.dnd-on {
-  color: #bb9af7;
-  /* Purple for dnd mode on */
+// Focus Assist styling
+.focus-on {
+  color: #bb9af7; /* Purple for focus mode on */
 }
 
-.dnd-off {
-  color: #7aa2f7;
-  /* Blue for dnd mode off */
+.focus-off {
+  color: #7aa2f7; /* Blue for focus mode off */
 }
 
-// Hover effects for dnd icons
-.hover .dnd-on {
-  color: #d4b8ff;
-  /* Brighter purple on hover */
+// Hover effects for Focus icons
+.hover .focus-on {
+  color: #d4b8ff;  /* Brighter purple on hover */
 }
 
-.hover .dnd-off {
-  color: #97baff;
-  /* Brighter blue on hover */
+.hover .focus-off {
+  color: #97baff;  /* Brighter blue on hover */
 }
