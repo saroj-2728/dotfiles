@@ -1,0 +1,469 @@
+// Power Menu Container
+.power-menu-container {
+  background: rgba(30, 30, 46, 0.95);
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+// Header styles
+.power-header {
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.power-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #cdd6f4;
+  margin-bottom: 10px;
+}
+
+.user-info {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-icon {
+  font-size: 32px;
+  color: #89b4fa;
+  min-width: 40px;
+}
+
+.user-details {
+  min-width: 0;
+}
+
+.username {
+  font-size: 16px;
+  font-weight: bold;
+  color: #cdd6f4;
+}
+
+.uptime {
+  font-size: 12px;
+  color: #a6adc8;
+  opacity: 0.8;
+}
+
+// Power options container
+.power-options-container {
+  padding: 10px 0;
+}
+
+.power-row {
+  min-height: 90px;
+}
+
+// Individual power option styles
+.power-option {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 300ms ease;
+  min-width: 120px;
+  min-height: 90px;
+}
+
+.power-option.hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.power-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+  transition: all 300ms ease;
+}
+
+.power-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #cdd6f4;
+}
+
+// Specific power option colors
+.power-option.lock {
+  background: rgba(166, 173, 200, 0.1);
+}
+
+.power-option.lock.hover {
+  background: rgba(166, 173, 200, 0.2);
+}
+
+.lock-icon {
+  color: #a6adc8;
+}
+
+.power-option.logout {
+  background: rgba(137, 180, 250, 0.1);
+}
+
+.power-option.logout.hover {
+  background: rgba(137, 180, 250, 0.2);
+}
+
+.logout-icon {
+  color: #89b4fa;
+}
+
+.power-option.suspend {
+  background: rgba(203, 166, 247, 0.1);
+}
+
+.power-option.suspend.hover {
+  background: rgba(203, 166, 247, 0.2);
+}
+
+.suspend-icon {
+  color: #cba6f7;
+}
+
+.power-option.hibernate {
+  background: rgba(148, 226, 213, 0.1);
+}
+
+.power-option.hibernate.hover {
+  background: rgba(148, 226, 213, 0.2);
+}
+
+.hibernate-icon {
+  color: #94e2d5;
+}
+
+.power-option.reboot {
+  background: rgba(250, 179, 135, 0.1);
+}
+
+.power-option.reboot.hover {
+  background: rgba(250, 179, 135, 0.2);
+}
+
+.reboot-icon {
+  color: #fab387;
+}
+
+.power-option.shutdown {
+  background: rgba(243, 139, 168, 0.1);
+}
+
+.power-option.shutdown.hover {
+  background: rgba(243, 139, 168, 0.2);
+}
+
+.shutdown-icon {
+  color: #f38ba8;
+}
+
+// Footer styles
+.power-footer {
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cancel-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px 24px;
+  color: #a6adc8;
+  font-weight: 600;
+  transition: all 300ms ease;
+}
+
+.cancel-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes scaleGrow {
+  from {
+    min-width: 50px;
+    min-height: 40px;
+    padding: 5px;
+    opacity: 0;
+  }
+  to {
+    min-width: 100px;
+    min-height: 80px;
+    padding: 15px 10px;
+    opacity: 1;
+  }
+}
+
+@keyframes containerGrow {
+  from {
+    padding: 10px;
+    margin-top: -10px;
+    opacity: 0;
+  }
+  to {
+    padding: 25px;
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes iconGrow {
+  from {
+    font-size: 16px;
+    opacity: 0;
+  }
+  to {
+    font-size: 28px;
+    opacity: 1;
+  }
+}
+
+// Power Menu Container
+.power-menu-container {
+  background: rgba(30, 30, 46, 0.95);
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  animation: containerGrow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+// Header styles
+.power-header {
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.power-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #cdd6f4;
+  margin-bottom: 10px;
+}
+
+.user-info {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-icon {
+  font-size: 32px;
+  color: #89b4fa;
+  min-width: 40px;
+}
+
+.user-details {
+  min-width: 0;
+}
+
+.username {
+  font-size: 16px;
+  font-weight: bold;
+  color: #cdd6f4;
+}
+
+.uptime {
+  font-size: 12px;
+  color: #a6adc8;
+  opacity: 0.8;
+}
+
+// Power options container
+.power-options-container {
+  padding: 10px 0;
+}
+
+.power-row {
+  min-height: 80px;
+}
+
+// Individual power option styles - NO FLEX
+.power-option {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 15px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 300ms ease;
+  min-width: 100px;
+  min-height: 80px;
+  animation: scaleGrow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.power-option.hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.power-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+  transition: all 300ms ease;
+  animation: iconGrow 0.5s ease-out;
+}
+
+.power-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #cdd6f4;
+}
+
+// Staggered delays for scaling effect
+.lock-option { 
+  animation-delay: 0.1s; 
+  animation-fill-mode: both; 
+}
+
+.logout-option { 
+  animation-delay: 0.15s; 
+  animation-fill-mode: both; 
+}
+
+.suspend-option { 
+  animation-delay: 0.2s; 
+  animation-fill-mode: both; 
+}
+
+.hibernate-option { 
+  animation-delay: 0.25s; 
+  animation-fill-mode: both; 
+}
+
+.reboot-option { 
+  animation-delay: 0.3s; 
+  animation-fill-mode: both; 
+}
+
+.shutdown-option { 
+  animation-delay: 0.35s; 
+  animation-fill-mode: both; 
+}
+
+// Staggered delays for icons
+.lock-icon { 
+  animation-delay: 0.2s; 
+  animation-fill-mode: both; 
+}
+
+.logout-icon { 
+  animation-delay: 0.25s; 
+  animation-fill-mode: both; 
+}
+
+.suspend-icon { 
+  animation-delay: 0.3s; 
+  animation-fill-mode: both; 
+}
+
+.hibernate-icon { 
+  animation-delay: 0.35s; 
+  animation-fill-mode: both; 
+}
+
+.reboot-icon { 
+  animation-delay: 0.4s; 
+  animation-fill-mode: both; 
+}
+
+.shutdown-icon { 
+  animation-delay: 0.45s; 
+  animation-fill-mode: both; 
+}
+
+// Specific power option colors
+.power-option.lock {
+  background: rgba(166, 173, 200, 0.1);
+}
+
+.power-option.lock.hover {
+  background: rgba(166, 173, 200, 0.2);
+}
+
+.lock-icon {
+  color: #a6adc8;
+}
+
+.power-option.logout {
+  background: rgba(137, 180, 250, 0.1);
+}
+
+.power-option.logout.hover {
+  background: rgba(137, 180, 250, 0.2);
+}
+
+.logout-icon {
+  color: #89b4fa;
+}
+
+.power-option.suspend {
+  background: rgba(203, 166, 247, 0.1);
+}
+
+.power-option.suspend.hover {
+  background: rgba(203, 166, 247, 0.2);
+}
+
+.suspend-icon {
+  color: #cba6f7;
+}
+
+.power-option.hibernate {
+  background: rgba(148, 226, 213, 0.1);
+}
+
+.power-option.hibernate.hover {
+  background: rgba(148, 226, 213, 0.2);
+}
+
+.hibernate-icon {
+  color: #94e2d5;
+}
+
+.power-option.reboot {
+  background: rgba(250, 179, 135, 0.1);
+}
+
+.power-option.reboot.hover {
+  background: rgba(250, 179, 135, 0.2);
+}
+
+.reboot-icon {
+  color: #fab387;
+}
+
+.power-option.shutdown {
+  background: rgba(243, 139, 168, 0.1);
+}
+
+.power-option.shutdown.hover {
+  background: rgba(243, 139, 168, 0.2);
+}
+
+.shutdown-icon {
+  color: #f38ba8;
+}
+
+// Footer styles
+.power-footer {
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cancel-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px 24px;
+  color: #a6adc8;
+  font-weight: 600;
+  transition: all 300ms ease;
+}
+
+.cancel-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}

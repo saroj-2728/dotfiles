@@ -1,0 +1,236 @@
+;; Define the closer widget for click-outside functionality
+(defwidget closer [window]
+  (eventbox :onclick "eww close ${window} && eww close ${window}-closer"))
+
+;; Define the closer window for control-center
+(defwindow control-center-closer
+  :monitor 1
+  :geometry (geometry :width "100%" :height "100%")
+  :stacking "fg"
+  :focusable false
+  (closer :window "control-center"))
+
+;; Define our control center window
+(defwindow control-center
+  :monitor 1
+  :geometry (geometry
+    :x "0.5%"
+    :y "0.8%"
+  :anchor "top right")
+  :stacking "fg"
+  :windowtype "dock"
+  :wm-ignore true
+  (box :class "control-center-box"
+    :orientation "v"
+    :space-evenly false
+    :spacing 10
+    (control-sliders)
+    (box :class "network-row"
+      :orientation "h"
+      :space-evenly true
+      :spacing 10
+      (wifi-control)
+      (bluetooth-control))
+    (box :class "feature-row"
+      :orientation "h"
+      :space-evenly true
+      :spacing 10
+      (nightlight-control)
+      (dnd-control))))
+
+;; Define the sliders section (brightness and volume)
+(defwidget control-sliders []
+  (box :class "sliders-box"
+    :orientation "v"
+    :space-evenly false
+    :spacing 15
+    
+    ;; Brightness control
+    (box :class "slider-item"
+      :orientation "h"
+      :space-evenly false
+      :spacing 10
+      (label :class "slider-icon" :text "󰃠")
+      (scale :value brightness
+        :onchange "~/.config/eww/control-center/scripts/set-brightness.sh {}"
+        :min 0
+        :max 100
+      :tooltip "Brightness: ${brightness}%"))
+    
+    ;; Volume control
+    (box :class "slider-item"
+      :orientation "h"
+      :space-evenly false
+      :spacing 10
+      (label :class "slider-icon" :text "${volume-icon}")
+      (scale :value volume
+        :onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%"
+        :min 0
+        :max 100
+      :tooltip "Volume: ${volume}%"))))
+
+;; Define WiFi control widget with hover effect
+(defwidget wifi-control []
+  (box :class "network-box"
+    :orientation "v"
+    :space-evenly false
+    :spacing 5
+    (box :class "network-container"
+      :orientation "h"
+      :space-evenly false
+      (eventbox
+        :onhover "${EWW_CMD} update wifi_hover=true"
+        :onhoverlost "${EWW_CMD} update wifi_hover=false"
+        :onclick "~/.config/eww/control-center/scripts/toggle-wifi.sh"
+        (box :class "network-details ${wifi_hover ? 'hover' : ''}"
+          :orientation "v"
+          :space-evenly false
+          :hexpand true
+          (box :class "icon-and-label"
+            :orientation "h"
+            :space-evenly false
+            :spacing 10
+            (label :class "network-icon ${wifi-status == 'connected' ? 'wifi-connected' : 'wifi-disconnected'}"
+            :text "${wifi-icon}")
+            (label :class "network-label"
+              :text "WiFi"
+            :halign "start"))
+          (label :class "network-status"
+            :text "${wifi-status == 'connected' ? wifi-ssid : 'Disconnected'}"
+          :halign "start")))
+      (button :class "network-arrow"
+        :onclick "notify-send 'WiFi Settings' 'Opening WiFi settings...'"
+        (label :text "❯")))))
+
+;; Define Bluetooth control widget with hover effect
+(defwidget bluetooth-control []
+  (box :class "network-box"
+    :orientation "v"
+    :space-evenly false
+    :spacing 5
+    (box :class "network-container"
+      :orientation "h"
+      :space-evenly false
+      (eventbox
+        :onhover "${EWW_CMD} update bt_hover=true"
+        :onhoverlost "${EWW_CMD} update bt_hover=false"
+        :onclick "~/.config/eww/control-center/scripts/toggle-bluetooth.sh"
+        (box :class "network-details ${bt_hover ? 'hover' : ''}"
+          :orientation "v"
+          :space-evenly false
+          :hexpand true
+          (box :class "icon-and-label"
+            :orientation "h"
+            :space-evenly false
+            :spacing 10
+            (label :class "network-icon ${bt-status ? 'bt-on' : 'bt-off'}"
+            :text "${bt-icon}")
+            (label :class "network-label"
+              :text "Bluetooth"
+            :halign "start"))
+          (label :class "network-status"
+            :text "${bt-status ? 'On' : 'Off'}"
+          :halign "start")))
+      (button :class "network-arrow"
+        :onclick "notify-send 'Bluetooth Settings' 'Opening Bluetooth settings...'"
+        (label :text "❯")))))
+
+;; Define Night Light control widget with hover effect - maintaining original layout
+(defwidget nightlight-control []
+  (eventbox
+    :onhover "${EWW_CMD} update nightlight_hover=true"
+    :onhoverlost "${EWW_CMD} update nightlight_hover=false"
+    :onclick "~/.config/eww/control-center/scripts/toggle-nightlight.sh"
+    (box :class "network-box ${nightlight_hover ? 'hover' : ''}"
+      :orientation "v"
+      :space-evenly false
+      :spacing 5
+      (box :class "network-container"
+        :orientation "h"
+        :space-evenly false
+        (box :class "network-details ${nightlight_hover ? 'text-hover' : ''}"
+          :orientation "v"
+          :space-evenly false
+          :hexpand true
+          (box :class "icon-and-label"
+            :orientation "h"
+            :space-evenly false
+            :spacing 10
+            (label :class "network-icon ${nightlight-status ? 'nightlight-on' : 'nightlight-off'}"
+            :text "${nightlight-status ? '󰛨' : '󱩌'}")
+            (label :class "network-label"
+              :text "Night Light"
+            :halign "start"))
+          (label :class "network-status"
+            :text "${nightlight-status ? 'On' : 'Off'}"
+          :halign "start"))))))
+
+;; Define dnd Assist control widget with hover effect - maintaining original layout
+(defwidget dnd-control []
+  (eventbox
+    :onhover "${EWW_CMD} update dnd_hover=true"
+    :onhoverlost "${EWW_CMD} update dnd_hover=false"
+    :onclick "~/.config/eww/control-center/scripts/toggle-dnd.sh"
+    (box :class "network-box ${dnd_hover ? 'hover' : ''}"
+      :orientation "v"
+      :space-evenly false
+      :spacing 5
+      (box :class "network-container"
+        :orientation "h"
+        :space-evenly false
+        (box :class "network-details ${dnd_hover ? 'text-hover' : ''}"
+          :orientation "v"
+          :space-evenly false
+          :hexpand true
+          (box :class "icon-and-label"
+            :orientation "h"
+            :space-evenly false
+            :spacing 10
+            (label :class "network-icon ${dnd-status ? 'dnd-on' : 'dnd-off'}"
+            :text "${dnd-status ? '󰍶' : '󰍶'}")
+            (label :class "network-label"
+              :text "DND"
+            :halign "start"))
+          (label :class "network-status"
+            :text "${dnd-status ? 'On' : 'Off'}"
+          :halign "start"))))))
+
+;; Variables
+(defpoll brightness :interval "1s"
+"cat ~/.cache/eww/brightness || echo 50")
+
+(defpoll volume :interval "1s"
+  "pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '[0-9]+(?=%)' | head -1 || echo 50")
+
+(defpoll volume-icon :interval "1s"
+"~/.config/eww/control-center/scripts/get-volume-icon.sh || echo '󰕾'")
+
+(defpoll wifi-status :interval "1s"
+"nmcli -t -f STATE g | head -n1 || echo 'disconnected'")
+
+(defpoll wifi-ssid :interval "1s"
+"nmcli -t -f active,ssid dev wifi | grep '^yes:' | cut -d':' -f2 || echo 'No Network'")
+
+(defpoll wifi-icon :interval "1s"
+"~/.config/eww/control-center/scripts/get-wifi-icon.sh || echo '󰤮'")
+
+;; Bluetooth variables
+(defpoll bt-status :interval "1s"
+"bluetoothctl show | grep 'Powered: yes' > /dev/null && echo true || echo false")
+
+(defpoll bt-icon :interval "1s"
+"~/.config/eww/control-center/scripts/get-bluetooth-icon.sh || echo '󰂲'")
+
+;; Night Light variables
+(defpoll nightlight-status :interval "1s"
+"~/.config/eww/control-center/scripts/get-nightlight-status.sh || echo false")
+
+;; dnd Assist variables
+(defpoll dnd-status :interval "1s"
+"~/.config/eww/control-center/scripts/get-dnd-status.sh || echo false")
+
+;; Hover state variables
+(defvar wifi_hover false)
+(defvar bt_hover false)
+(defvar nightlight_hover false)
+(defvar dnd_hover false)

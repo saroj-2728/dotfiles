@@ -1,166 +1,371 @@
-{
-    "layer": "top",
-    "position": "top",
-    "height": 40,
-    "spacing": 0,
-    "margin-top":4,
-    "margin-left": 4,
-    "margin-right": 4,
-    "modules-left": [
-        "custom/launcher",
-        "hyprland/window",
-        "hyprland/workspaces"
-    ],
-    "modules-center": [
-        "mpris"
-    ],
-    "modules-right": [
-        "clock",
-        "battery",
-        "network",
-        "pulseaudio",
-        "tray",
-        "custom/user"
-    ],
-    "custom/launcher": {
-        "format": "󰀻",
-        "tooltip": false,
-        "on-click": "rofi -show drun"
-    },
-    "hyprland/window": {
-        "format": "{class}",
-        "separate-outputs": true,
-        "max-length": 50,
-        "rewrite": {
-            "code-oss": "󰨞",
-            "Code": "󰨞",
-            "firefox": "󰈹",
-            "Firefox": "󰈹",
-            "kitty": "󰆍",
-            "Kitty": "󰆍",
-            "brave-browser": "󰖟",
-            "Brave-browser": "󰖟",
-            "": "󰀄"
-        }
-    },
-    "hyprland/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "format": "{name}",
-        "format-icons": {
-            "1": "1",
-            "2": "2",
-            "3": "3",
-            "4": "4",
-            "5": "5",
-            "6": "6",
-            "7": "7",
-            "8": "8",
-            "9": "9",
-            "10": "10",
-            "urgent": "",
-            "focused": "",
-            "default": ""
-        },
-        "persistent-workspaces": {
-            "1": [],
-            "2": [],
-            "3": []
-        }
-    },
-    "clock": {
-        "timezone": "Asia/Kathmandu",
-        "format": "{:%H:%M}",
-        "format-alt": "{:%a %d %b}",
-        "tooltip": true,
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "calendar": {
-            "mode": "month",
-            "mode-mon-col": 3,
-            "weeks-pos": "right",
-            "on-scroll": 1,
-            "format": {
-                "months": "<span color='#fab387'><b>{}</b></span>",
-                "days": "<span color='#a6e3a1'><b>{}</b></span>",
-                "weeks": "<span color='#89dceb'><b>W{}</b></span>",
-                "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
-                "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
-            }
-        }
-    },
-    "battery": {
-        "interval": 20,
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{icon} {capacity}%",
-        "format-charging": "󰂄 {capacity}%",
-        "format-plugged": "󰂄 {capacity}%",
-        "format-alt": "{capacity}%",
-        "format-icons": [
-            "󰂎",
-            "󰁺",
-            "󰁻",
-            "󰁼",
-            "󰁽",
-            "󰁾",
-            "󰁿",
-            "󰂀",
-            "󰂁",
-            "󰂂",
-            "󰁹"
+[
+    {
+        "layer": "top",
+        "position": "top",
+        "output": "eDP-1",
+        "height": 40,
+        "spacing": 0,
+        "margin-top": 4,
+        "margin-left": 4,
+        "margin-right": 4,
+        "modules-left": [
+            "custom/launcher",
+            "hyprland/window",
+            "hyprland/workspaces"
         ],
-        "tooltip-format": "{capacity}% - {timeTo}"
-    },
-    "network": {
-        "format-wifi": "󰤨 {signalStrength}%",
-        "format-ethernet": "󰈀",
-        "format-disconnected": "󰤭 0%",
-        "format-disabled": "󰤭",
-        "tooltip-format-wifi": "{essid} - {signalStrength}%",
-        "tooltip-format-ethernet": "Connected",
-        "tooltip-format-disconnected": "Disconnected"
-    },
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "󰝟",
-        "format-icons": {
-            "default": [
-                "󰕿",
-                "󰖀",
-                "󰕾"
-            ]
+        "modules-center": [
+            "mpris"
+        ],
+        "modules-right": [
+            "clock",
+            "battery",
+            "network",
+            "pulseaudio",
+            "backlight",
+            "tray",
+            "custom/user"
+        ],
+        "custom/launcher": {
+            "format": "󰀻",
+            "tooltip": false,
+            "on-click": "rofi -show drun"
         },
-        "tooltip-format": "Volume: {volume}%",
-        "on-click": "pavucontrol"
-    },
-    "mpris": {
-        "format": "{player_icon} {dynamic}",
-        "format-paused": "{status_icon}",
-        "player-icons": {
-            "default": "▶",
-            "mpv": "🎵"
+        "hyprland/window": {
+            "format": "{class}",
+            "separate-outputs": true,
+            "max-length": 50,
+            "rewrite": {
+                "code-oss": "󰨞",
+                "Code": "󰨞",
+                "firefox": "󰈹",
+                "Firefox": "󰈹",
+                "kitty": "󰆍",
+                "Kitty": "󰆍",
+                "brave-browser": "󰖟",
+                "Brave-browser": "󰖟",
+                "": "󰀄"
+            }
         },
-        "status-icons": {
-            "paused": "⏸"
+        "hyprland/workspaces": {
+            "disable-scroll": true,
+            "all-outputs": true,
+            "format": "{name}",
+            "format-icons": {
+                "1": "1",
+                "2": "2",
+                "3": "3",
+                "4": "4",
+                "5": "5",
+                "6": "6",
+                "7": "7",
+                "8": "8",
+                "9": "9",
+                "10": "10",
+                "urgent": "",
+                "focused": "",
+                "default": ""
+            },
+            "persistent-workspaces": {
+                "1": [],
+                "2": [],
+                "3": []
+            }
         },
-        "max-length": 45,
-        "on-click": "playerctl play-pause",
-        "on-click-right": "playerctl next",
-        "on-click-middle": "playerctl previous"
+        "clock": {
+            "timezone": "Asia/Kathmandu",
+            "format": "{:%H:%M}",
+            "format-alt": "{:%a %d %b}",
+            "tooltip": true,
+            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+            "calendar": {
+                "mode": "month",
+                "mode-mon-col": 3,
+                "weeks-pos": "right",
+                "on-scroll": 1,
+                "format": {
+                    "months": "<span color='#fab387'><b>{}</b></span>",
+                    "days": "<span color='#a6e3a1'><b>{}</b></span>",
+                    "weeks": "<span color='#89dceb'><b>W{}</b></span>",
+                    "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+                    "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+                }
+            }
+        },
+        "battery": {
+            "interval": 20,
+            "states": {
+                "good": 95,
+                "warning": 30,
+                "critical": 15
+            },
+            "format": "{icon} {capacity}%",
+            "format-charging": "󰂄 {capacity}%",
+            "format-plugged": "󰂄 {capacity}%",
+            "format-alt": "{capacity}%",
+            "format-icons": [
+                "󰂎",
+                "󰁺",
+                "󰁻",
+                "󰁼",
+                "󰁽",
+                "󰁾",
+                "󰁿",
+                "󰂀",
+                "󰂁",
+                "󰂂",
+                "󰁹"
+            ],
+            "tooltip-format": "{capacity}% - {timeTo}"
+        },
+        "network": {
+            "format-wifi": "󰤨 {signalStrength}%",
+            "format-ethernet": "󰈀",
+            "format-disconnected": "󰤭 0%",
+            "format-disabled": "󰤭 0%",
+            "tooltip-format-wifi": "{essid} - {signalStrength}%",
+            "tooltip-format-ethernet": "Connected",
+            "tooltip-format-disconnected": "Disconnected",
+            "on-click": "~/.config/waybar/scripts/wifi-menu.sh"
+        },
+        "pulseaudio": {
+            "format": "{icon} {volume}%",
+            "format-muted": "󰝟 0%",
+            "format-icons": {
+                "default": [
+                    "󰕿",
+                    "󰖀",
+                    "󰕾"
+                ]
+            },
+            "tooltip-format": "Volume: {volume}%",
+            "on-click": "pavucontrol",
+            "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+        },
+        "mpris": {
+            "format": "{player_icon} {dynamic}",
+            "format-paused": "{status_icon}",
+            "player-icons": {
+                "default": "▶",
+                "mpv": "🎵"
+            },
+            "status-icons": {
+                "paused": "⏸"
+            },
+            "max-length": 45,
+            "on-click": "playerctl play-pause",
+            "on-click-right": "playerctl next",
+            "on-click-middle": "playerctl previous"
+        },
+        "tray": {
+            "icon-size": 14,
+            "spacing": 6,
+            "show-passive-items": true
+        },
+        "custom/user": {
+            "format": "{}",
+            "exec": "whoami",
+            "interval": 3600,
+            "tooltip": false,
+            "on-click": "~/.config/waybar/scripts/toggle-control-center.sh"
+        },
+        "backlight": {
+            "device": "intel_backlight",
+            "format": "{icon} {percent}%",
+            "format-icons": [
+                "󰃞",
+                "󰃟",
+                "󰃝",
+                "󰃠"
+            ],
+            "on-scroll-up": "brightnessctl set +1%",
+            "on-scroll-down": "brightnessctl set 1%-",
+            "on-click": "brightnessctl set 100%",
+            "tooltip": true,
+            "tooltip-format": "Brightness: {percent}%"
+        }
     },
-    "tray": {
-        "icon-size": 14,
-        "spacing": 6,
-        "show-passive-items": true
-    },
-    "custom/user": {
-        "format": "󰀄 {}",
-        "exec": "whoami",
-        "interval": 3600,
-        "tooltip": false,
-        "on-click": "rofi -show filebrowser"
+    {
+        "layer": "top",
+        "position": "top",
+        "output": "HDMI-A-1",
+        "height": 40,
+        "spacing": 0,
+        "margin-top": 4,
+        "margin-left": 4,
+        "margin-right": 4,
+        "modules-left": [
+            "custom/launcher",
+            "hyprland/window",
+            "hyprland/workspaces"
+        ],
+        "modules-center": [
+            "mpris"
+        ],
+        "modules-right": [
+            "clock",
+            "battery",
+            "network",
+            "pulseaudio",
+            "backlight",
+            "tray",
+            "custom/user"
+        ],
+        "custom/launcher": {
+            "format": "󰀻",
+            "tooltip": false,
+            "on-click": "rofi -show drun"
+        },
+        "hyprland/window": {
+            "format": "{class}",
+            "separate-outputs": true,
+            "max-length": 50,
+            "rewrite": {
+                "code-oss": "󰨞",
+                "Code": "󰨞",
+                "firefox": "󰈹",
+                "Firefox": "󰈹",
+                "kitty": "󰆍",
+                "Kitty": "󰆍",
+                "brave-browser": "󰖟",
+                "Brave-browser": "󰖟",
+                "": "󰀄"
+            }
+        },
+        "hyprland/workspaces": {
+            "disable-scroll": true,
+            "all-outputs": true,
+            "format": "{name}",
+            "format-icons": {
+                "1": "1",
+                "2": "2",
+                "3": "3",
+                "4": "4",
+                "5": "5",
+                "6": "6",
+                "7": "7",
+                "8": "8",
+                "9": "9",
+                "10": "10",
+                "urgent": "",
+                "focused": "",
+                "default": ""
+            },
+            "persistent-workspaces": {
+                "1": [],
+                "2": [],
+                "3": []
+            }
+        },
+        "clock": {
+            "timezone": "Asia/Kathmandu",
+            "format-alt": "{:%H:%M}",
+            "format": "{:%a %d %b}",
+            "tooltip": true,
+            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+            "calendar": {
+                "mode": "month",
+                "mode-mon-col": 3,
+                "weeks-pos": "right",
+                "on-scroll": 1,
+                "format": {
+                    "months": "<span color='#fab387'><b>{}</b></span>",
+                    "days": "<span color='#a6e3a1'><b>{}</b></span>",
+                    "weeks": "<span color='#89dceb'><b>W{}</b></span>",
+                    "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+                    "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+                }
+            }
+        },
+        "battery": {
+            "interval": 20,
+            "states": {
+                "good": 95,
+                "warning": 30,
+                "critical": 15
+            },
+            "format": "{icon} {capacity}%",
+            "format-charging": "󰂄 {capacity}%",
+            "format-plugged": "󰂄 {capacity}%",
+            "format-alt": "{capacity}%",
+            "format-icons": [
+                "󰂎",
+                "󰁺",
+                "󰁻",
+                "󰁼",
+                "󰁽",
+                "󰁾",
+                "󰁿",
+                "󰂀",
+                "󰂁",
+                "󰂂",
+                "󰁹"
+            ],
+            "tooltip-format": "{capacity}% - {timeTo}"
+        },
+        "network": {
+            "format-wifi": "󰤨 {signalStrength}%",
+            "format-ethernet": "󰈀",
+            "format-disconnected": "󰤭 0%",
+            "format-disabled": "󰤭 0%",
+            "tooltip-format-wifi": "{essid} - {signalStrength}%",
+            "tooltip-format-ethernet": "Connected",
+            "tooltip-format-disconnected": "Disconnected",
+            "on-click": "~/.config/waybar/scripts/wifi-menu.sh"
+        },
+        "pulseaudio": {
+            "format": "{icon} {volume}%",
+            "format-muted": "󰝟 0%",
+            "format-icons": {
+                "default": [
+                    "󰕿",
+                    "󰖀",
+                    "󰕾"
+                ]
+            },
+            "tooltip-format": "Volume: {volume}%",
+            "on-click": "pavucontrol",
+            "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+        },
+        "mpris": {
+            "format": "{player_icon} {dynamic}",
+            "format-paused": "{status_icon}",
+            "player-icons": {
+                "default": "▶",
+                "mpv": "🎵"
+            },
+            "status-icons": {
+                "paused": "⏸"
+            },
+            "max-length": 45,
+            "on-click": "playerctl play-pause",
+            "on-click-right": "playerctl next",
+            "on-click-middle": "playerctl previous"
+        },
+        "tray": {
+            "icon-size": 14,
+            "spacing": 6,
+            "show-passive-items": true
+        },
+        "custom/user": {
+            "format": "{}",
+            "exec": "whoami",
+            "interval": 3600,
+            "tooltip": false,
+        },
+        "backlight": {
+            "device": "intel_backlight",
+            "format": "{icon} {percent}%",
+            "format-icons": [
+                "󰃞",
+                "󰃟",
+                "󰃝",
+                "󰃠"
+            ],
+            "on-scroll-up": "brightnessctl set +1%",
+            "on-scroll-down": "brightnessctl set 1%-",
+            "on-click": "brightnessctl set 100%",
+            "tooltip": true,
+            "tooltip-format": "Brightness: {percent}%"
+        }
     }
-}
+]

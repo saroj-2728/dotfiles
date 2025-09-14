@@ -1,0 +1,176 @@
+;; Define the closer widget for click-outside functionality
+(defwidget closer [window]
+  (eventbox :onclick "eww close ${window} && eww close ${window}-closer"))
+
+;; Define the closer window for power-menu
+(defwindow power-menu-closer
+  :monitor 0
+  :geometry (geometry :width "100%" :height "100%")
+  :stacking "fg"
+  :focusable false
+  (closer :window "power-menu"))
+
+;; Define our power menu window
+(defwindow power-menu
+  :monitor 0
+  :geometry (geometry
+    :x "50%"
+    :y "50%"
+    :width "450px"
+    :height "400px"
+    :anchor "center")
+  :stacking "overlay"
+  :windowtype "dock"
+  :wm-ignore false
+  (box :class "power-menu-container"
+    :orientation "v"
+    :space-evenly false
+    :spacing 20
+    (power-menu-header)
+    (power-menu-options)
+    (power-menu-footer)))
+
+;; Header with title and user info
+(defwidget power-menu-header []
+  (box :class "power-header"
+    :orientation "v"
+    :space-evenly false
+    :spacing 10
+    (label :class "power-title" :text "Power Menu")
+    (box :class "user-info"
+      :orientation "h"
+      :space-evenly false
+      :spacing 10
+      (label :class "user-icon" :text "󰀄")
+      (box :class "user-details"
+        :orientation "v"
+        :space-evenly false
+        (label :class "username" :text "${username}" :halign "start")
+        (label :class "uptime" :text "Uptime: ${uptime}" :halign "start")))))
+
+;; Main power options grid - 3 columns layout
+(defwidget power-menu-options []
+  (box :class "power-options-container"
+    :orientation "v"
+    :space-evenly false
+    :spacing 15
+    
+    ;; First row - Lock, Logout, Suspend
+    (box :class "power-row"
+      :orientation "h"
+      :space-evenly true
+      :spacing 15
+      (lock-option)
+      (logout-option)
+      (suspend-option))
+    
+    ;; Second row - Hibernate, Reboot, Shutdown
+    (box :class "power-row"
+      :orientation "h"
+      :space-evenly true
+      :spacing 15
+      (hibernate-option)
+      (reboot-option)
+      (shutdown-option))))
+
+;; Individual power option widgets
+(defwidget lock-option []
+  (eventbox
+    :onhover "eww update lock_hover=true"
+    :onhoverlost "eww update lock_hover=false"
+    :onclick "~/.config/eww/power-menu/scripts/lock.sh && eww close power-menu && eww close power-menu-closer"
+    (box :class "power-option lock ${lock_hover ? 'hover' : ''}"
+      :orientation "v"
+      :space-evenly false
+      :spacing 8
+      (label :class "power-icon lock-icon" :text "󰌾")
+      (label :class "power-label" :text "Lock"))))
+
+(defwidget logout-option []
+  (eventbox
+    :onhover "eww update logout_hover=true"
+    :onhoverlost "eww update logout_hover=false"
+    :onclick "~/.config/eww/power-menu/scripts/logout.sh && eww close power-menu && eww close power-menu-closer"
+    (box :class "power-option logout ${logout_hover ? 'hover' : ''}"
+      :orientation "v"
+      :space-evenly false
+      :spacing 8
+      (label :class "power-icon logout-icon" :text "󰍃")
+      (label :class "power-label" :text "Logout"))))
+
+(defwidget suspend-option []
+  (eventbox
+    :onhover "eww update suspend_hover=true"
+    :onhoverlost "eww update suspend_hover=false"
+    :onclick "~/.config/eww/power-menu/scripts/suspend.sh && eww close power-menu && eww close power-menu-closer"
+    (box :class "power-option suspend ${suspend_hover ? 'hover' : ''}"
+      :orientation "v"
+      :space-evenly false
+      :spacing 8
+      (label :class "power-icon suspend-icon" :text "󰤄")
+      (label :class "power-label" :text "Suspend"))))
+
+(defwidget hibernate-option []
+  (eventbox
+    :onhover "eww update hibernate_hover=true"
+    :onhoverlost "eww update hibernate_hover=false"
+    :onclick "~/.config/eww/power-menu/scripts/hibernate.sh && eww close power-menu && eww close power-menu-closer"
+    (box :class "power-option hibernate ${hibernate_hover ? 'hover' : ''}"
+      :orientation "v"
+      :space-evenly false
+      :spacing 8
+      (label :class "power-icon hibernate-icon" :text "󰋊")
+      (label :class "power-label" :text "Hibernate"))))
+
+(defwidget reboot-option []
+  (eventbox
+    :onhover "eww update reboot_hover=true"
+    :onhoverlost "eww update reboot_hover=false"
+    :onclick "~/.config/eww/power-menu/scripts/reboot.sh && eww close power-menu && eww close power-menu-closer"
+    (box :class "power-option reboot ${reboot_hover ? 'hover' : ''}"
+      :orientation "v"
+      :space-evenly false
+      :spacing 8
+      (label :class "power-icon reboot-icon" :text "󰜉")
+      (label :class "power-label" :text "Reboot"))))
+
+(defwidget shutdown-option []
+  (eventbox
+    :onhover "eww update shutdown_hover=true"
+    :onhoverlost "eww update shutdown_hover=false"
+    :onclick "~/.config/eww/power-menu/scripts/shutdown.sh && eww close power-menu && eww close power-menu-closer"
+    (box :class "power-option shutdown ${shutdown_hover ? 'hover' : ''}"
+      :orientation "v"
+      :space-evenly false
+      :spacing 8
+      (label :class "power-icon shutdown-icon" :text "󰐥")
+      (label :class "power-label" :text "Shutdown"))))
+
+;; Footer with cancel button
+(defwidget power-menu-footer []
+  (box :class "power-footer"
+    :orientation "h"
+    :space-evenly false
+    :halign "center"
+    (button :class "cancel-button"
+      :onclick "eww close power-menu && eww close power-menu-closer"
+      (box :orientation "h"
+        :space-evenly false
+        :spacing 8
+        (label :text "󰅖")
+        (label :text "Cancel")))))
+
+;; Variables for user info
+(defpoll username :interval "10s"
+  "whoami")
+
+(defpoll uptime :interval "10s"
+  "uptime -p | sed 's/up //'")
+
+;; Hover state variables
+(defvar lock_hover false)
+(defvar logout_hover false)
+(defvar suspend_hover false)
+(defvar hibernate_hover false)
+(defvar reboot_hover false)
+(defvar shutdown_hover false)

@@ -146,6 +146,7 @@ window#waybar {
 #battery,
 #network,
 #pulseaudio,
+#backlight,
 #tray {
     background: rgba(18, 22, 26, 0.7);
     border-radius: 0;
@@ -162,12 +163,17 @@ window#waybar {
     background: rgba(18, 22, 26, 0.7);
     border-radius: 0 6px 6px 0;
     margin: 0;
-    padding: 0 10px 0 4px;
+    padding: 0 10px 0 30px;
     border: 1px solid rgba(26, 230, 204, 1);
     border-left: none;
     color: #ffffff;
     transition: background 0.2s ease;
     font-weight: 500;
+    background-image: url("file:///home/saroj/.config/waybar/assets/avatar.png");
+    background-repeat: no-repeat;
+    background-position: 4px center;
+    background-size: 21px 21px;
+    background-clip: padding-box;
 }
 
 /* Individual module styling */
@@ -202,6 +208,10 @@ window#waybar {
     color: #DDA0DD;
 }
 
+#backlight {
+    color: #ffe066;
+}
+
 #pulseaudio.muted {
     color: #FF6B6B;
 }
@@ -212,12 +222,22 @@ window#waybar {
 
 /* Hover effects for the combined block */
 #clock:hover,
-#custom-user:hover,
 #battery:hover,
 #network:hover,
 #pulseaudio:hover,
+#backlight:hover,
 #tray:hover {
     background: rgba(50, 50, 50, 0.9);
+}
+
+/* Hover effect for the user module */
+#custom-user:hover {
+    background: rgba(50, 50, 50, 0.9);
+    background-image: url("file:///home/saroj/.config/waybar/assets/avatar.png");
+    background-repeat: no-repeat;
+    background-position: 6px center;
+    background-size: 20px 20px;
+    background-clip: padding-box;
 }
 
 /* Tooltips */

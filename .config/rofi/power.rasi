@@ -1,0 +1,97 @@
+configuration {
+    show-icons: false;
+    font: "JetBrains Mono Nerd Font Medium 12";
+    disable-history: false;
+    hide-scrollbar: true;
+    sidebar-mode: false;
+}
+
+@theme "/dev/null"
+
+* {
+    bg: rgba(30, 30, 30, 0.7);
+    bg-alt: rgba(50, 50, 50, 0.7);
+    
+    fg: #ffffff;
+    fg-alt: rgba(255, 255, 255, 0.7);
+    
+    selected: rgba(255, 255, 255, 0.25);
+    selected-bg: rgba(255, 255, 255, 0.15);
+    
+    background-color: transparent;
+    border-color: rgba(60, 60, 60, 0.8);
+    
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    transparency: "real";
+    location: northeast;
+    anchor: northeast;
+    x-offset: -6px;
+    y-offset: 8px;
+    width: 200px;
+    background-color: @bg;
+    border: 1px;
+    border-color: @border-color;
+    border-radius: 6px;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [listview];
+    padding: 8px;
+}
+
+listview {
+    background-color: transparent;
+    columns: 1;
+    lines: 6;
+    cycle: true;
+    dynamic: true;
+    scrollbar: false;
+    layout: vertical;
+    reverse: false;
+    fixed-height: false;
+    fixed-columns: true;
+    spacing: 4px;
+}
+
+element {
+    background-color: transparent;
+    text-color: @fg-alt;
+    orientation: horizontal;
+    border-radius: 4px;
+    padding: 8px 12px;
+    border: 1px;
+    border-color: transparent;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @fg-alt;
+}
+
+element selected.normal {
+    background-color: @selected-bg;
+    text-color: @fg;
+    border: 1px;
+    border-color: @border-color;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @fg-alt;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    expand: true;
+    horizontal-align: 0;
+    vertical-align: 0.5;
+    margin: 0px 0px 0px 0px;
+}
